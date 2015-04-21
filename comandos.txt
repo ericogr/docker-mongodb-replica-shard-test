@@ -4,9 +4,6 @@ docker inspect rs1_srv1|grep -Po '(?<="IPAddress": ")[^"]*'
 --executar javascript em um container
 docker exec mongos1 mongo --eval "printjson(db.serverStatus())"
 
---importar dados de um json da pasta host /tmp para a pasta /mnt/tmp (previamente mapeada) do container
-docker exec mongos1 mongoimport --db dbshard1 --collection pessoas --type json --jsonArray --file /mnt/tmp/pessoas.json
-
 --estatísticas das instancias do mongo
 mongostat --host 172.17.0.122:27017,172.17.0.123:27017,172.17.0.124:27017,172.17.0.125:27017,172.17.0.126:27017,172.17.0.127:27017
 
@@ -16,6 +13,9 @@ use dbshard1
 sh.enableSharding("dbshard1")
 db.createCollection("pessoas")
 sh.shardCollection("dbshard1.pessoas", { "nome": 1 })
+
+--importar dados de um json da pasta host /tmp para a pasta /mnt/tmp (previamente mapeada) do container
+docker exec mongos1 mongoimport --db dbshard1 --collection pessoas --type json --jsonArray --file /mnt/tmp/pessoas.json
 
 --comandos básicos
 rs.status()
