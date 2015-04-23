@@ -137,7 +137,7 @@ function executarDockerMongo() {
     execucao=$?
 
     if [ "$execucao" -ne "0" ]; then
-      echo "Erro ao executar comando [$execucao]; nova tentativa em $TEMPO_ESPERA_SUBIDA_CONFIG_SERVERS segundos"
+      echo "Erro ao executar comando [$execucao]; Aguarde nova tentativa em $TEMPO_ESPERA_SUBIDA_CONFIG_SERVERS segundos"
       sleep $TEMPO_ESPERA_SUBIDA_CONFIG_SERVERS
     else
       break
@@ -145,7 +145,7 @@ function executarDockerMongo() {
 
   done
 
-  echo " executando docker fim"
+  echo " execução do comando mongo finalizada!"
 }
 
 #Configura o ip das máquinas replicantes, substituindo o nome fornecido
@@ -220,9 +220,9 @@ function telaInicial() {
   echo
   echo "O docker criará diversos containers para a configuração especificada"
   echo "Nomenclatura:"
-  echo " mongos1: ponto de entrada para as bases Mongodb (máquina roteador)"
+  echo " mongos1: ponto de entrada para as bases Mongodb (roteador)"
   echo " "$PREFIXO_REPLICADORES"_x_y: máquinas (x) que pertencem a um set de replica (y)"
-  echo " "$PREFIXO_CONFIGURADORES"_1_x: máquinas (x) que pertencem a configuração para os shards"
+  echo " "$PREFIXO_CONFIGURADORES"_1_x: máquinas (x) que pertencem a configuração dos shards"
   echo
 
 }
@@ -231,8 +231,8 @@ function telaInicial() {
 telaInicial
 
 #---leitura dos parâmetros---
-REPLICADORES=$(leituraDeDados "Digite a quantidade de conjunto de instâncias para cada replica set: [$REPLICADORES])" $REPLICADORES)
-GRP_REPLICADORES=$(leituraDeDados "Digite a shards: [$GRP_REPLICADORES])" $GRP_REPLICADORES)
+REPLICADORES=$(leituraDeDados "Digite a quantidade de replicas de instâncias para cada replica set: [$REPLICADORES])" $REPLICADORES)
+GRP_REPLICADORES=$(leituraDeDados "Digite a quantidade de shards: [$GRP_REPLICADORES])" $GRP_REPLICADORES)
 
 #---replicadores---
 
@@ -262,5 +262,4 @@ executaDockerMongoRouter ${IPS[1]}
 configuraShard
 
 echo "IPs primary: $IPS_PRIMARY"
-
 echo "pronto"

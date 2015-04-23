@@ -1,7 +1,7 @@
 # docker-mongodb-replica-shard-test
-O objetivo deste projeto é fornecer um ambiente para testar um cluster de máquinas
-com replicação e sharding de Mongodb 3. A primeira execução cria todo o ambiente com
-containers utilizando uma nomenclatura padrão. Para executar novamente, será
+O objetivo deste projeto é a criação de um ambiente para testar um cluster de máquinas
+com replicação e sharding com Mongodb 3. A primeira execução cria todo o ambiente com
+containers utilizando uma nomenclatura padronizada. Para executar novamente, será
 preciso antes finalizar os containers criados anteriormente por este script.
 
 ##Passos para testar o shard com replicação do mongodb
@@ -20,7 +20,7 @@ Pré-requisitos
   conjunto de replicação de 3 máquinas.
 
   -Obs: durante a criação das máquinas, alguns scripts serão executados pelo
-        mongo, mas muitas vezes a instância ainda não estará pronta. Desta
+        mongo, mas muitas vezes, a instância ainda não estará pronta. Desta
         forma, o script será executado novamente depois de alguns segundos.
         Isso pode levar alguns minutos, então, aguarde até que o processo chegue
         ao fim.
@@ -60,7 +60,7 @@ Pré-requisitos
  -Na raiz do projeto temos o arquivo pessoas.json com um cojunto de dados para
   testar. Coloque este arquivo na pasta /tmp de seu host para que fique disponível
   na pasta /mnt/tmp do container mongos1. Execute a importação:
-  
+
   ```
   #docker \
     exec mongos1 mongoimport \
