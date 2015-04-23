@@ -2,10 +2,8 @@
 
 #criação e configuração automatizada de um shard com
 #replicação no mongodb
-#https://sebastianvoss.com/docker-mongodb-sharded-cluster.html
 
-#Parametros:
-#Replicantes e grupo de replicantes
+#Parâmetros:
 declare MONGODB_PORTA=27017
 declare REPLICADORES=3
 declare GRP_REPLICADORES=2
