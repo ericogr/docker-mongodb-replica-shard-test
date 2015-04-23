@@ -194,8 +194,45 @@ function configuraShard() {
   done
 }
 
-#set -x
-#trap read debug
+
+#Recebe
+#       $1 mensagem
+#       $2 valor padrao
+#Retorno
+#       parÂmetro lido
+function leituraDeDados() {
+  read -p "$1"": " parametro
+
+  if [ -z "$parametro" ]
+  then
+    echo "$2"
+  else
+    echo "$parametro"
+  fi
+}
+
+function telaInicial() {
+  echo
+  echo "===================================================================="
+  echo "Criação automatizada de máquinas para testar a replicação de dados e"
+  echo "shards para Mongodb utilizando Docker"
+  echo "===================================================================="
+  echo
+  echo "O docker criará diversos containers para a configuração especificada"
+  echo "Nomenclatura:"
+  echo " mongos1: ponto de entrada para as bases Mongodb (máquina roteador)"
+  echo " "$PREFIXO_REPLICADORES"_x_y: máquinas (x) que pertencem a um set de replica (y)"
+  echo " "$PREFIXO_CONFIGURADORES"_1_x: máquinas (x) que pertencem a configuração para os shards"
+  echo
+
+}
+
+#---boas vindas---
+telaInicial
+
+#---leitura dos parâmetros---
+REPLICADORES=$(leituraDeDados "Digite a quantidade de conjunto de instâncias para cada replica set: [$REPLICADORES])" $REPLICADORES)
+GRP_REPLICADORES=$(leituraDeDados "Digite a shards: [$GRP_REPLICADORES])" $GRP_REPLICADORES)
 
 #---replicadores---
 
