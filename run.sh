@@ -135,7 +135,7 @@ function executarDockerMongo() {
     execucao=$?
 
     if [ "$execucao" -ne "0" ]; then
-      echo "Erro ao executar comando [$execucao]; Aguarde nova tentativa em $TEMPO_ESPERA_SUBIDA_CONFIG_SERVERS segundos"
+      echo "Processando... aguarde nova tentativa em $TEMPO_ESPERA_SUBIDA_CONFIG_SERVERS segundos [$execucao]"
       sleep $TEMPO_ESPERA_SUBIDA_CONFIG_SERVERS
     else
       break
